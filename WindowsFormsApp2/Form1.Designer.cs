@@ -82,6 +82,7 @@
             this.checkBox1.TabIndex = 5;
             this.checkBox1.Text = "enable repeat";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // textBox3
             // 
@@ -101,9 +102,10 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(127, 523);
+            this.textBox4.Location = new System.Drawing.Point(-4, 417);
+            this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(240, 20);
+            this.textBox4.Size = new System.Drawing.Size(548, 221);
             this.textBox4.TabIndex = 8;
             this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
