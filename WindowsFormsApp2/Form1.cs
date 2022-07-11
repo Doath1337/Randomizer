@@ -41,37 +41,36 @@ namespace WindowsFormsApp2
             textBox4.Clear();
             Random rnd = new Random();
             int count = Convert.ToInt32(textBox3.Text);
+            int min, max;
+            min = Convert.ToInt32(textBox1.Text);
+            max = Convert.ToInt32(textBox2.Text);
+
             if (checkBox1.Checked == true)
             {
-                List<int> list = new List<int>(Convert.ToInt32(textBox3.Text));
+                List<int> list = new List<int>(count);
+                var Delete = list.Distinct();
                 for (int i = 0; i < count; i++)
                 {
                     try
                     {
-                        int min, max;
-                        min = Convert.ToInt32(textBox1.Text);
-                        max = Convert.ToInt32(textBox2.Text);                        
-                         int valueRnd = rnd.Next(min, max);
-                        if (list.Count != 0)
+                        int valueRnd = rnd.Next(min, max);
+                        list.Add(valueRnd);
+                        var set = new HashSet<int>();
+                        lock (list)
                         {
-                            for(int j =0; j < list.Count; j++)
+                            foreach (var item in list)
                             {
-                                if (list[j] == valueRnd)
+                                if (!set.Add(item))
                                 {
-                                    while(list[j] == valueRnd)
-                                    {
-                                         valueRnd = rnd.Next(min, max);
-                                    }
+                                    list.RemoveAt(list.Count - 1);
+                                    
+                                    break;
                                 }
+
                             }
-                            list.Add(valueRnd);
                         }
-                        else if(list.Count == 0)
-                        {
-                            list.Add(valueRnd);
-                        }  
+
                         
-                        textBox4.Text += valueRnd + " ";
                     }
                     catch (System.ArgumentOutOfRangeException)
                     {
@@ -84,6 +83,10 @@ namespace WindowsFormsApp2
                         Error.Show();
                     }
                 }
+                for (int j = 0; j < list.Count - 1; j++)
+                {
+                    textBox4.Text += list[j].ToString() + " ";
+                }
 
             }
             else if (checkBox1.Checked == false)
@@ -92,10 +95,6 @@ namespace WindowsFormsApp2
                 {
                     try
                     {
-                        int min, max;
-                        min = Convert.ToInt32(textBox1.Text);
-                        max = Convert.ToInt32(textBox2.Text);
-
                         int valueRnd = rnd.Next(min, max);
                         textBox4.Text += valueRnd.ToString() + " ";
                     }
@@ -119,9 +118,9 @@ namespace WindowsFormsApp2
         {
 
         }
-        
+
     }
-   
+
 }
 
 
