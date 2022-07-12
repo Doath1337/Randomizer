@@ -38,18 +38,22 @@ namespace WindowsFormsApp2
 
         private void button1_Click(object sender, EventArgs e)
         {
+
             textBox4.Clear();
             Random rnd = new Random();
             int count = Convert.ToInt32(textBox3.Text);
             int min, max;
             min = Convert.ToInt32(textBox1.Text);
             max = Convert.ToInt32(textBox2.Text);
+           
 
-            if (checkBox1.Checked == true)
+            if (checkBox1.Checked == true && max-min > count)
             {
+               
                 List<int> list = new List<int>(count);
                 var Delete = list.Distinct();
-                for (int i = 0; i < count; i++)
+                
+                for (int i = 0; list.Count != count +1; i++)
                 {
                     try
                     {
@@ -110,6 +114,10 @@ namespace WindowsFormsApp2
                     }
                 }
             }
+            else if(checkBox1.Checked == true && max - min < count)
+            {
+                textBox4.Text += "The number of digits is less than their values from min to max";
+            }
 
 
         }
@@ -119,6 +127,10 @@ namespace WindowsFormsApp2
 
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
