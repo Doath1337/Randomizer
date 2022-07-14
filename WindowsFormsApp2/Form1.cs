@@ -8,55 +8,43 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Linq;
+using MetroFramework.Components;
+using MetroFramework.Forms;
 
 namespace WindowsFormsApp2
 {
 
-    public partial class Form1 : Form
+    public partial class Form1 : MetroForm
     {
         public Form1()
         {
             InitializeComponent();
         }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-
-        }
-
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-            textBox4.Clear();
-            Random rnd = new Random();
-            int count = Convert.ToInt32(textBox3.Text);
-            int min, max;
-            min = Convert.ToInt32(textBox1.Text);
-            max = Convert.ToInt32(textBox2.Text);
-           
-
-            if (checkBox1.Checked == true && max-min > count)
+            try
             {
-               
-                List<int> list = new List<int>(count);
-                var Delete = list.Distinct();
-                
-                for (int i = 0; list.Count != count +1; i++)
+                textBox4.Clear();
+                Random rnd = new Random();
+                int count = Convert.ToInt32(textBox3.Text);
+                int min, max;
+                min = Convert.ToInt32(textBox1.Text);
+                max = Convert.ToInt32(textBox2.Text)+1;
+                if (max < min)
                 {
-                    try
+                    MinAndMaxError Error = new MinAndMaxError();
+                    Error.Show();
+                }
+
+                if (checkBox1.Checked == true && max - min >= count)
+                {
+
+                    List<int> list = new List<int>(count);
+                    var Delete = list.Distinct();
+
+                    for (int i = 0; list.Count != count ; i++)
                     {
+
                         int valueRnd = rnd.Next(min, max);
                         list.Add(valueRnd);
                         var set = new HashSet<int>();
@@ -67,75 +55,63 @@ namespace WindowsFormsApp2
                                 if (!set.Add(item))
                                 {
                                     list.RemoveAt(list.Count - 1);
-                                    
+
                                     break;
                                 }
 
                             }
                         }
+                    }
+                    for (int j = 0; j < list.Count ; j++)
+                    {
+                        textBox4.Text += list[j].ToString() + " ";
+                    }
 
-                        
-                    }
-                    catch (System.ArgumentOutOfRangeException)
-                    {
-                        MinAndMaxError Error = new MinAndMaxError();
-                        Error.Show();
-                    }
-                    catch (System.FormatException)
-                    {
-                        FormatException Error = new FormatException();
-                        Error.Show();
-                    }
                 }
-                for (int j = 0; j < list.Count - 1; j++)
+                else if (checkBox1.Checked == false)
                 {
-                    textBox4.Text += list[j].ToString() + " ";
-                }
+                    for (int i = 0; i < count; i++)
+                    {
 
-            }
-            else if (checkBox1.Checked == false)
-            {
-                for (int i = 0; i < count; i++)
-                {
-                    try
-                    {
                         int valueRnd = rnd.Next(min, max);
                         textBox4.Text += valueRnd.ToString() + " ";
-                    }
-                    catch (System.ArgumentOutOfRangeException)
-                    {
-                        MinAndMaxError Error = new MinAndMaxError();
-                        Error.Show();
-                    }
-                    catch (System.FormatException)
-                    {
-                        FormatException Error = new FormatException();
-                        Error.Show();
+
+
                     }
                 }
+                else if (checkBox1.Checked == true && max - min < count)
+                {
+                    textBox4.Text += "The number of digits is less than their values from min to max";
+                }
+
+
             }
-            else if(checkBox1.Checked == true && max - min < count)
+            catch (System.ArgumentOutOfRangeException)
             {
-                textBox4.Text += "The number of digits is less than their values from min to max";
+                MinAndMaxError Error = new MinAndMaxError();
+                Error.Show();
             }
-
-
+            catch (System.FormatException)
+            {
+                FormatException Error = new FormatException();
+                Error.Show();
+            }
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(textBox4.Text);
+            try
+            {
+                Clipboard.SetText(textBox4.Text);
+            }
+            catch
+            {
+                textBox4.Text = @"""SPAAAAAAAAAAAAAAAAAAAAAAACE""";
+            }
         }
+
+
     }
 
 }
