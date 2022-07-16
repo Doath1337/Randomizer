@@ -8,19 +8,35 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Linq;
-using MetroFramework.Components;
-using MetroFramework.Forms;
+
 
 namespace WindowsFormsApp2
 {
 
-    public partial class Form1 : MetroForm
+    public partial class Form1 : Form
     {
         public Form1()
         {
+
             InitializeComponent();
+
         }
-        private void button1_Click_1(object sender, EventArgs e)
+       
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Clipboard.SetText(textBox4.Text);
+            }
+            catch
+            {
+                textBox4.Text = @"""SPAAAAAAAAAAAAAAAAAAAAAAACE""";
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
             try
             {
@@ -29,7 +45,7 @@ namespace WindowsFormsApp2
                 int count = Convert.ToInt32(textBox3.Text);
                 int min, max;
                 min = Convert.ToInt32(textBox1.Text);
-                max = Convert.ToInt32(textBox2.Text)+1;
+                max = Convert.ToInt32(textBox2.Text) + 1;
                 if (max < min)
                 {
                     MinAndMaxError Error = new MinAndMaxError();
@@ -42,7 +58,7 @@ namespace WindowsFormsApp2
                     List<int> list = new List<int>(count);
                     var Delete = list.Distinct();
 
-                    for (int i = 0; list.Count != count ; i++)
+                    for (int i = 0; list.Count != count; i++)
                     {
 
                         int valueRnd = rnd.Next(min, max);
@@ -62,7 +78,7 @@ namespace WindowsFormsApp2
                             }
                         }
                     }
-                    for (int j = 0; j < list.Count ; j++)
+                    for (int j = 0; j < list.Count; j++)
                     {
                         textBox4.Text += list[j].ToString() + " ";
                     }
@@ -89,7 +105,7 @@ namespace WindowsFormsApp2
             catch (System.ArgumentOutOfRangeException)
             {
                 MinAndMaxError Error = new MinAndMaxError();
-                Error.Show();
+                Error.Show();   
             }
             catch (System.FormatException)
             {
@@ -97,21 +113,6 @@ namespace WindowsFormsApp2
                 Error.Show();
             }
         }
-
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Clipboard.SetText(textBox4.Text);
-            }
-            catch
-            {
-                textBox4.Text = @"""SPAAAAAAAAAAAAAAAAAAAAAAACE""";
-            }
-        }
-
-
     }
 
 }

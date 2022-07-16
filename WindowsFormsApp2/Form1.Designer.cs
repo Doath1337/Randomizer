@@ -38,7 +38,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new MetroFramework.Controls.MetroButton();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -67,7 +67,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(338, 69);
+            this.label3.Location = new System.Drawing.Point(338, 70);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(108, 13);
             this.label3.TabIndex = 4;
@@ -120,14 +120,13 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(135, 335);
+            this.button1.Location = new System.Drawing.Point(148, 335);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(215, 53);
-            this.button1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.button1.Size = new System.Drawing.Size(202, 53);
             this.button1.TabIndex = 11;
-            this.button1.Text = "RANDOWIZE";
-            this.button1.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.button1.Text = "RANDOMIZE";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
@@ -163,7 +162,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Button button2;
-        private MetroFramework.Controls.MetroButton button1;
+        private System.Windows.Forms.Button button1;
     }
 }
 
